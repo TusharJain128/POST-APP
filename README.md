@@ -1,6 +1,6 @@
 # POST-APP
 
-##Create a Post App with API,
+## Create a Post App with API,
 
 Where,
 User can create a post and comment on it
@@ -9,5 +9,5 @@ User can edit and delete the post
 User can edit and delete the comment
 
 
-##Requirement:
+## Requirement:
 Use any UI and API library to create the app
