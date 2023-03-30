@@ -6,7 +6,7 @@ exports.loginUser = async function (req, res) {
         let { email, password } = data
 
         let checkEmail = await userModel.findOne({ email: email })
-        console.log(checkEmail);
+        
         if (!checkEmail) {
             let userData = userModel.create(data)
             return res.status(200).send({ status: true, message: "Login successfully" })

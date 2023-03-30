@@ -1,7 +1,7 @@
 const postModel = require('../models/postModel')
 
 exports.createPost = async function(req,res){
-    let data= req.data
+    let data= req.body
     let { userId, post} = data
 
     if(!userId){
@@ -14,5 +14,14 @@ exports.createPost = async function(req,res){
     let createPost = await postModel.create(data)
     return res.status(201).send({status:true, message: createPost})
     
+}
+
+exports.getPost = async function (req, res){
+
+    let userId = req.params.userId
+
+    let postData = await postModel.find({userId: userId})
+
+    res.status(200).send({status:true, message:postData})
 }
 
