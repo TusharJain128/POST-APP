@@ -2,10 +2,9 @@ const mongoose = require('mongoose')
 
 const commentSchema= new mongoose.Schema({
     'postId': {
-        type: mongoose.Schema.Types.ObjectId,
-        required: true
+        type: mongoose.Schema.Types.ObjectId
     },
-    'comment': {
+    'commentData': {
         type: String,
         required: true
     },
@@ -14,8 +13,8 @@ const commentSchema= new mongoose.Schema({
         default: false
     },
     'commentReplyId': {
-        type: String
+        type: mongoose.Schema.Types.ObjectId
     }
 }, {timestamps: true})
 
-module.exports= mongoose.Model('comment', commentSchema)
+module.exports= mongoose.model('Comment', commentSchema)
