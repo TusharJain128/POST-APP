@@ -7,10 +7,22 @@ export default function Login(){
   const [ email, setEmail] = useState("")
   const [ password, setPassword]= useState("")
   const navigate = useNavigate()
+
+  const LoginUser= async function(event){
+    event.preventDefault()
+    await axios.post('http://localhost:3001/loginUser', {email,password})
+    .then((res)=>{
+      alert('account login successfully')
+      navigate('/Post')
+    })
+    .catch((err)=>{
+      alert(err.response.data.message)
+    })
+  }
   
     return(
         <>
-        <form>
+        <form onSubmit={LoginUser}>
           <div>
             <label>Email  </label>
             <input id="email" type= "text" placeholder="Enter your Email" value={email} onChange={(e=>setEmail(e.target.value))}/>
