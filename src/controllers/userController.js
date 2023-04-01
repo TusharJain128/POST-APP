@@ -1,6 +1,8 @@
 const userModel = require('../models/userModel')
+const jwt = require('jsonwebtoken')
 
 exports.loginUser = async function (req, res) {
+    res.setHeader('Access-Control-Allow-Origin', '*')
     try {
         let data = req.body
         let { email, password } = data
@@ -9,11 +11,14 @@ exports.loginUser = async function (req, res) {
         
         if (!checkEmail) {
             let userData = userModel.create(data)
-            return res.status(200).send({ status: true, message: "Login successfully" })
+
+            let token = jwt.sign({userId:userData._id}, 'x-api-key')
+            return res.status(200).send({ status: true, token:token })
         }
         else {
             if (checkEmail.password == password) {
-                return res.status(200).send({ status: true, message: "Login successfully" })
+                let token = jwt.sign({userId:checkEmail._id}, 'x-api-key')
+                return res.status(200).send({ status: true, token:token })
             }
             else {
                 return res.status(401).send({ status: false, message: "Please enter correct password" })

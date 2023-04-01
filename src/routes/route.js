@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const {loginUser} = require('../controllers/userController')
-const {createPost, getPost} = require('../controllers/postController')
+const {createPost, getPost, getPostById} = require('../controllers/postController')
 
 router.get('/test', (req,res)=>{
     res.send("api is working fine")
@@ -9,6 +9,7 @@ router.get('/test', (req,res)=>{
 
 router.post('/loginUser', loginUser)
 router.post('/createPost', createPost)
-router.get('/getPost:postId', getPost)
+router.get('/getPost', getPost)
+router.get('/getPost:postId', getPostById)
 
 module.exports= router

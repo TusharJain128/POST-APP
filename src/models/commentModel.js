@@ -2,7 +2,8 @@ const mongoose = require('mongoose')
 
 const commentSchema= new mongoose.Schema({
     'postId': {
-        type: mongoose.Schema.Types.ObjectId
+        type: String,
+        required:true
     },
     'commentData': {
         type: String,
@@ -13,7 +14,8 @@ const commentSchema= new mongoose.Schema({
         default: false
     },
     'commentReplyId': {
-        type: mongoose.Schema.Types.ObjectId
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Comment'
     }
 }, {timestamps: true})
 
