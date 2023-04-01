@@ -2,7 +2,7 @@ const commentModel = require('../models/commentModel')
 const postModel = require('../models/postModel')
 
 exports.createPost = async function(req,res){
-    res.setHeaders('Access-Control-Allow-Origin', '*')
+    res.setHeader('Access-Control-Allow-Origin', '*')
 
     let data= req.body
     let { userId, post} = data
@@ -21,22 +21,25 @@ exports.createPost = async function(req,res){
 
 exports.getPost = async function (req, res){
 
-    res.setHeaders('Access-Control-Allow-Origin', '*')
+    res.setHeader('Access-Control-Allow-Origin', '*')
 
     let postData = await postModel.find()
 
     res.status(200).send({status:true, message:postData})
 }
 
-// exports.getPostById = async function(req,res){
+exports.getPostById = async function(req,res){
 
-//     res.setHeaders('Access-Control-Allow-Origin', '*')
+    res.setHeader('Access-Control-Allow-Origin', '*')
 
-//     let postId = req.params.postId
+    let postId = req.params.postId
 
-//     let comments = await commentModel.find({postId: postId})
-//     let postData = await postModel.findById(postId)
+    let comments = await commentModel.find({postId: postId})// .populate("commentReplyId")
 
-//     res.status(200).send({status:true, message: postData})
-// }
+    let postData = await postModel.findById(postId)
+
+    postData = postData.toObject()
+    postData.comment = comments
+    res.status(200).send({status:true, message: postData})
+}
 
