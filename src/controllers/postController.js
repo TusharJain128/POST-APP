@@ -34,8 +34,12 @@ exports.getPostById = async function(req,res){
 
     let postId = req.params.postId
 
-    let comments = await commentModel.find({postId: postId})// .populate("commentReplyId")
-
+    let comments = await commentModel.find({postId: postId}).lean()
+    for(let i =0; i<comments.length; i++){
+        let commentReply = await commentModel.find({commentReplyId: comments[i]._id})
+        comments[i].Reply = commentReply
+    }
+    
     let postData = await postModel.findById(postId)
 
     postData = postData.toObject()
