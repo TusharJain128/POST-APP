@@ -1,40 +1,39 @@
-import React, {useState, useEffect} from 'react'
-import {useNavigate} from 'react-router-dom'
+import axios from "axios"
+import { useState  } from "react"
+import {useNavigate} from "react-router-dom"
 
+export default function LoginPage(){
+const [email ,setEmail] = useState("")
+const [password ,setPassword] = useState("")
+const navigate = useNavigate();
 
-export default function Login(){
-
-  const [ email, setEmail] = useState("")
-  const [ password, setPassword]= useState("")
-  const navigate = useNavigate()
-
-  const LoginUser= async function(event){
-    event.preventDefault()
-    await axios.post('http://localhost:3001/loginUser', {email,password})
-    .then((res)=>{
-      alert('account login successfully')
-      navigate('/Post')
-    })
-    .catch((err)=>{
-      alert(err.response.data.message)
-    })
-  }
-  
+ const userLogin = async  function (event){
+    event.preventDefault();
+    axios.post('http://localhost:3001/loginUser',{
+        email,password
+       })
+        .then((res)=>{
+          alert( `Your Acount Login Succesfully`)
+          const token  =  res.data.token;
+          localStorage.setItem("x-api-key" ,token)
+          navigate('/CreatePost')
+        }).catch((err)=>{
+           alert(err.response.data.message + err.response.status +" Error")
+        })
+    }
     return(
         <>
-        <form onSubmit={LoginUser}>
-          <div>
-            <label>Email  </label>
-            <input id="email" type= "text" placeholder="Enter your Email" value={email} onChange={(e=>setEmail(e.target.value))}/>
-          </div>
-          <div>
-            <label>Password  </label>
-            <input id= "password" type= "text" placeholder="Enter your Password" value={password} onChange={(e=>setPassword(e.target.value))}/>
-          </div>
-          <div>
-            <button id="submit" type= "submit">Sign in</button>
-          </div>
-        </form>
+    <div className="row m-3">
+  
+    <div className="col m-5">
+        <form onSubmit={userLogin}><br/><br/><br/>
+           <h1>Login</h1>
+            <input type='email' placeholder="Email id" onChange={((e)=>setEmail(e.target.value))}/><br/>
+            <input type='password' placeholder="Password" onChange={((e)=>setPassword(e.target.value))}/> <br/>    
+            <input  className="btn btn-primary" type="submit" placeholder="SUBMIT" /><br/>
+         </form>
+        </div>
+    </div>
         </>
     )
 }

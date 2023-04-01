@@ -8,10 +8,12 @@ const rootElement = document.getElementById('root');
 const root = createRoot(rootElement);
 
 root.render(
+  <>
   <BrowserRouter>
   <Routes>
-  <Route path = "/" element= {<LoginPage/>}/>
-  <Route path = "/Post" element= {<CreatePost/>}/>
+  <Route path = '/' element= {<LoginPage/>}/>
+  <Route path = '/CreatePost' element= {<CreatePost/>}/>
   </Routes>
   </BrowserRouter>
+  </>
 );
