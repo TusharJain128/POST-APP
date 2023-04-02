@@ -16,7 +16,7 @@ const navigate = useNavigate();
           alert( `Your Acount Login Succesfully`)
           const token  =  res.data.token;
           localStorage.setItem("x-api-key" ,token)
-          navigate('/CreatePost')
+          navigate('/getPost')
         }).catch((err)=>{
            alert(err.response.data.message + err.response.status +" Error")
         })
