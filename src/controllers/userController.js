@@ -12,12 +12,12 @@ exports.loginUser = async function (req, res) {
         if (!checkEmail) {
             let userData = userModel.create(data)
 
-            let token = jwt.sign({userId:userData._id}, 'x-api-key')
+            let token = jwt.sign({userId:userData._id}, 'secret code')
             return res.status(200).send({ status: true, token:token })
         }
         else {
             if (checkEmail.password == password) {
-                let token = jwt.sign({userId:checkEmail._id}, 'x-api-key')
+                let token = jwt.sign({userId:checkEmail._id}, 'secret code')
                 return res.status(200).send({ status: true, token:token })
             }
             else {

@@ -8,10 +8,6 @@ const commentSchema= new mongoose.Schema({
         type: String,
         required: true
     },
-    'isReply':{
-        type:Boolean,
-        default: false
-    },
     'commentReplyId': {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Comment'
