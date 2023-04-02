@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import axios from 'axios'
 
-export default async function CreatePost(event){
+export default function CreatePost(){
   // event.preventDefault()
     
 
