@@ -4,7 +4,8 @@
   "description": "Where,\r User can create a post and comment on it\r User can comment on a comment as well\r User can edit and delete the post\r User can edit and delete the comment",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "src/index.js"
   },
   "repository": {
     "type": "git",
